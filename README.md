@@ -4,20 +4,20 @@ This is a quick example of a few services using docker-compose to showcase how e
 
 # dependencies
 
-* node/npm
-* docker (or docker for mac)
+* node 
+* docker / docker for mac
 
 
 # getting started
 
 ## API
 * `cd api`
-* `npm install`
-* `./scripts/build.sh`
+* `npm install` - install npm dependencies
+* `./scripts/build.sh` - build docker image for api
 
 ## UI
 * `cd ui`
-* `./scripts/build.sh`
+* `./scripts/build.sh` - build docker image for ui
 
 ## Docker compose
 * make sure you're at the root of the project
