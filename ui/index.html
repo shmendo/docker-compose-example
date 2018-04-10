@@ -1,0 +1,27 @@
+<html>
+<head>
+
+</head>
+<body>
+  <h1>Delicious Puppies</h1>
+  <table id="taco-table"></table>
+  <script>
+    fetch('http://localhost:3000/tacos')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(response) {
+      var table = document.getElementById('taco-table');
+      response.tacos.forEach((taco, index) => {
+        var row = table.insertRow(index);
+        var cell = row.insertCell(0);
+        cell.innerHTML = taco.name;
+      });
+    })
+    .catch((error) => {
+      console.log('error:', error);
+      alert('oops, something went wrong!');
+    });
+  </script>
+</body>
+</html>

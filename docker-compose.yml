@@ -1,0 +1,44 @@
+version: '2'
+volumes:
+  mvp-ui-src:
+    driver_opts:
+      type: none
+      device: /Users/benjaminwalters/Desktop/Bad\ Panda\ Studios\ LLC/Talks/2018/April/mvp/code/ui
+      o: bind
+services:
+  mvp-ui:
+    image: 'mvp-ui:latest'
+    expose: 
+      - '80'
+    ports:
+      - '80:80'
+    links:
+      - postgres
+    depends_on:
+      - mvp-api
+      - postgres
+    volumes:
+      - 'mvp-ui-src:/usr/share/nginx/html'
+  postgres:
+    image: 'postgres:9.6.1'
+    expose:
+      - '5432'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  mvp-api:
+    image: 'mvp-api:latest'
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_ENDPOINT=postgres
+    env_file: api/.env
